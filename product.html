@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Café Aroma</title>
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .product-details {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-details img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Café Aroma</h1>
+        <p>Product Details</p>
+    </header>
+
+    <main class="container">
+        <div class="product-details">
+            <h2 id="product-title">Product Title</h2>
+            <img id="product-image" src="" alt="Product Image">
+            <p id="product-description">Product description will appear here.</p>
+        </div>
+    </main>
+    <script>
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+        function updateProductDetails(item) {
+            const titleElement = document.getElementById('product-title');
+            const imageElement = document.getElementById('product-image');
+            const descriptionElement = document.getElementById('product-description');
+            const priceElement = document.getElementById('product-price');
+
+            const products = {
+                coffee: {
+                    title: 'Coffee',
+                    image: 'https://cdn.pixabay.com/photo/2015/06/24/01/15/coffee-819362_1280.jpg',
+                    description: 'Aromatic coffee brewed to perfection.',
+                },
+                pastries: {
+                    title: 'Pastries',
+                    image: 'https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_1280.jpg',
+                    description: 'Freshly baked pastries for a sweet treat.',
+                },
+                tea: {
+                    title: 'Tea',
+                    image: 'https://cdn.pixabay.com/photo/2022/02/23/18/11/drink-7031154_1280.jpg',
+                    description: 'Various flavors of tea to refresh you.',
+                },
+                desserts: {
+                    title: 'Desserts',
+                    image: 'https://cdn.pixabay.com/photo/2024/04/13/11/29/muffins-8693748_1280.jpg',
+                    description: 'Delicious desserts to satisfy your sweet tooth.',                },
+                breakfast: {
+                    title: 'Breakfast',
+                    image: 'https://cdn.pixabay.com/photo/2016/11/18/14/39/beans-1834984_1280.jpg',
+                    description: 'Hearty breakfast options to start your day right.',
+                }
+            };
+
+            const product = products[item];
+            if (product) {
+                titleElement.textContent = product.title;
+                imageElement.src = product.image;
+                descriptionElement.textContent = product.description;
+                priceElement.textContent = `Price: ${product.price}`;
+            } else {
+                titleElement.textContent = 'Product Not Found';
+                descriptionElement.textContent = 'Sorry, this product is not available.';
+                priceElement.textContent = '';
+                imageElement.src = '';
+            }
+        }
+        const item = getQueryParam('item');
+        updateProductDetails(item);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
